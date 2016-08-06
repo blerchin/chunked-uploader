@@ -100,7 +100,10 @@ class ChunkedUploader {
     const chunk = this.chunks[cur];
     let ready = true;
     ready = ready && chunk.ready();
-    if(cur === this.chunks.length -1){
+    if(cur !== 0 && !this.chunks[0].progress){
+      ready = false;
+    }
+    if(this.chunks.length > 2 && (cur === this.chunks.length -1)){
       const lastFullChunkDone = this.chunks[this.chunks.length-2].succeeded;
       ready = ready && (this.countSucceeded() === this.chunks.length - 1) && lastFullChunkDone;
     }
@@ -196,12 +199,16 @@ class ChunkedUploader {
   getBytesLoaded(){
     let loaded = 0;
     this.chunks.forEach(function(c){
-      loaded += c.getBytesLoaded();
+      let bytes = c.getBytesLoaded();
+      if(bytes){
+        loaded += bytes;
+      }
     })
     return loaded;
   }
 
   getProgress(){
+    console.log('getBytesLoaded', this.getBytesLoaded(), this.file.size)
     return this.getBytesLoaded() / this.file.size;
   }
 }

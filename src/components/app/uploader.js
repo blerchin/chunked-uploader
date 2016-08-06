@@ -27,14 +27,12 @@ export default class Uploader extends React.Component {
     uploader.start().then(()=>{
       this.setState({status: 'success'})
     })
-    /*
     uploader.on('error', (err)=>{
-      this.setState({status: 'error: ' + err})
+      console.log(err)
     })
     uploader.on('progress', (evt)=>{
-      this.setState({progress: evt.progress});
+      console.log(evt)
     })
-    */
 
   }
 
