@@ -61,7 +61,6 @@ class ChunkedUploader {
   }
 
   addChunk (blob, start, end) {
-    console.log(start + '-' + end);
     const chunk = new Chunk(blob, this.getChunkOpts(start, end));
     chunk.on('success'  , this.onChunkSuccess.bind(this));
     chunk.on('error'    , this.onChunkError.bind(this));
@@ -73,7 +72,6 @@ class ChunkedUploader {
   }
 
   start() {
-    console.log('start')
     this.splitChunks();
     this.stopped = false;
     this.tick();
@@ -116,7 +114,6 @@ class ChunkedUploader {
       return;
     }
     let running = this.countRunning();
-    console.log('running', running)
     let cur = 0;
     while(running < maxSimultaneous && cur < this.chunks.length){
       let chunk = this.chunks[cur];
@@ -170,7 +167,6 @@ class ChunkedUploader {
   }
 
   onChunkComplete(){
-    console.log('onChunkComplete')
     this.tick();
   }
 
@@ -208,7 +204,6 @@ class ChunkedUploader {
   }
 
   getProgress(){
-    console.log(this.chunks.map((c)=>c.progress))
     return this.getBytesLoaded() / this.file.size;
   }
 }

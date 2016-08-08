@@ -26,7 +26,6 @@ class Chunk {
   }
 
   send () {
-    console.log('sending')
     const headers = this.getHeaders();
     const {method, url, params} = this.options;
 
@@ -35,7 +34,6 @@ class Chunk {
     for(let prop in params){
       formData.append(prop, params[prop]);
     }
-    console.log(method)
 
     this.req = request[method.toLowerCase()](url)
       .set(headers)
@@ -116,7 +114,6 @@ class Chunk {
   }
 
   onError (res) {
-    console.log('error')
     this.emit('error', res);
     this.retry(res);
   }
