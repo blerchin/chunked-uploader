@@ -389,7 +389,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      this.req = _superagent2.default[method.toLowerCase()](url).set(headers).send(formData).on('progress', this.onProgress.bind(this)).end(function (err, res) {
 	        if (err || res.status > 300) {
-	          _this.onError(res);
+	          _this.onError(err || res);
 	        } else if (res.status > 100) {
 	          _this.onSuccess(res);
 	        }
