@@ -1,4 +1,4 @@
-import ChunkedUploader from './ChunkedUploader'
+import ChunkedUploader from '../../src/ChunkedUploader'
 import sinon from 'sinon'
 
 describe('ChunkedUploader', function(){
