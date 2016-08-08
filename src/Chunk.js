@@ -40,7 +40,7 @@ class Chunk {
       .on('progress', this.onProgress.bind(this))
       .end((err, res) => {
         if (err || res.status > 300) {
-          this.onError(res);
+          this.onError(err || res);
         } else if (res.status > 100) {
           this.onSuccess(res);
         }
