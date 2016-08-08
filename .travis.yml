@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-  - "0.12"
-  - "iojs"
-
-install:
-  - npm install
-
-script:
-  - NODE_ENV=production npm run deploy
+  - "4"
+  - "5"
+  - "stable"
+sudo: false
+script: "gulp coverage"
+after_success:
+  - npm install -g codeclimate-test-reporter
+  - codeclimate-test-reporter < coverage/lcov.info

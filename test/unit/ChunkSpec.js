@@ -1,14 +1,15 @@
-import Chunk from './Chunk';
+import Chunk from '../../src/Chunk';
 import {expect} from 'chai'
 import sinon from 'sinon'
 
-```
+/*
+per cloudinary:
 When implementing chunked upload you must comply with the following restrictions:
 - Header must contain X-Unique-Upload-Id which is the same (and unique) for all parts.
 - Every part must contain Content-Range header which is applicable to the location of the chunk in the overall file (start-end/total).
 - Last chunk must be last. meaning it must arrive the server after all other chunks returned.
 - Each chunk must be larger than 5mb except the last one
-```
+*/
 
 describe('Chunk', function(){
   describe('#constructor', function () {
@@ -72,7 +73,7 @@ describe('Chunk', function(){
     });
 
     it('returns an object with Content-Range', function(){
-      expect(c.getHeaders()).to.have.property('Content-Range', '0-1/2');
+      expect(c.getHeaders()).to.have.property('Content-Range', 'bytes 0-1/2');
     });
   });
 

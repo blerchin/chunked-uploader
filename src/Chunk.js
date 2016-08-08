@@ -34,7 +34,6 @@ class Chunk {
     for(let prop in params){
       formData.append(prop, params[prop]);
     }
-
     this.req = request[method.toLowerCase()](url)
       .set(headers)
       .send(formData)
