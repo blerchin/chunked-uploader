@@ -208,7 +208,7 @@ class ChunkedUploader {
   }
 
   getProgress(){
-    console.log('getBytesLoaded', this.getBytesLoaded(), this.file.size)
+    console.log(this.chunks.map((c)=>c.progress))
     return this.getBytesLoaded() / this.file.size;
   }
 }

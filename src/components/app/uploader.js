@@ -9,7 +9,7 @@ export default class Uploader extends React.Component {
     super();
     this.state = {
       status: 'Not started',
-      progress: '0'
+      progress: 0
     }
   }
 
@@ -26,11 +26,14 @@ export default class Uploader extends React.Component {
     })
     uploader.start().then(()=>{
       this.setState({status: 'success'})
+    }).catch((err)=>{
+      this.setState({status: 'error: ' + err})
     })
     uploader.on('error', (err)=>{
       console.log(err)
     })
     uploader.on('progress', (evt)=>{
+      this.setState({progress: evt.progress})
       console.log(evt)
     })
 

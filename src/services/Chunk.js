@@ -86,23 +86,21 @@ class Chunk {
   }
 
   getBytesLoaded(){
-    if(!this.progress){
-      return;
-    }
-    const {loaded, total, lengthComputable} = this.progress;
+    const {endByte, startByte} = this.options
     if(this.succeeded){
-      return this.options.totalBytes;
+      return endByte - startByte;
     }
-    if(this.failed) {
+    if(!this.progress){
       return 0;
     }
-    if(this.stopped){
+    const {loaded, total, lengthComputable} = this.progress;
+    if(this.failed || this.stopped) {
       return 0;
     }
     if(lengthComputable){
       return loaded;
     } else {
-      return 0;
+      return endByte - startByte;
     }
   }
 
@@ -124,13 +122,13 @@ class Chunk {
   }
 
   onSuccess (res) {
-    this.emit('success', res);
     this.succeeded = true;
+    this.emit('success', res);
   }
 
   onComplete (res) {
-    this.emit('complete', res);
     this.stopped = true;
+    this.emit('complete', res);
   }
 }
 
